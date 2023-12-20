@@ -84,6 +84,16 @@ class Player:
                 print("Ooo yeah baby, come in a little closer.")
                 self.energy -= 5
                 self.time += 2
+    
+    def sell_crack(self):
+        prob = random.randrange(0, (self.alc + 1))
+        if prob < 3:
+            self.wallet += 10
+            print(f"You sold crack!\nYou now have ${self.wallet} in your wallet!\nDon't you just love crack?")
+        elif prob >=3:
+            print('''You drunk idiot! You went to the bathroom and DID crack. *__*''')
+            self.energy *=2
+    
 
                 
             
@@ -102,3 +112,4 @@ for player in range(1, num_of_players + 1):
 player_dict[1].drink()
 player_dict[2].play_pool()
 player_dict[3].dance()
+player_dict[4].sell_crack()
