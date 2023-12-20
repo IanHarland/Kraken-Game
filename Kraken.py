@@ -35,20 +35,24 @@ class Player:
                 available_methods.append('drink')
             if self.wallet > 0:
                 available_methods.append('play pool')
-            if self.energy >= 5:
+            if self.energy >= 10:
                 available_methods.append('dance')
             if self.energy >= 5 and total_time_elapsed >= 1:
                 available_methods.append('sell crack')
             if self.time > 3 and self.energy >= 20:
                 available_methods.append('suck dick')
+            available_methods.append('go to work')
             user_choice_string = ""
             count = 1
             for item in available_methods:
                 user_choice_string += f'\n{count} - ' + item
                 count += 1
-            user_choice_index = int(input(f"({total_time_elapsed}) {self.name} - choose one of the following actions:{user_choice_string}\n: "))
-            while user_choice_index not in range(1, len(available_methods) + 1):
-                user_choice_index = int(input(f"{self.name} - choose one of the following actions:{user_choice_string}\nEnter a digit in 1-{count}: "))
+            user_choice_index = input(f"({total_time_elapsed}) {self.name} - choose one of the following actions:{user_choice_string}\n: ")
+            if user_choice_index.isdigit() == False:
+                self.choose_action()
+            user_choice_index = int(user_choice_index)
+            if user_choice_index not in range(1, len(available_methods) + 1):
+                self.choose_action()
             if available_methods[user_choice_index - 1] == 'drink':
                 self.drink()
             elif available_methods[user_choice_index - 1] == 'play pool':
@@ -59,6 +63,8 @@ class Player:
                 self.sell_crack()
             elif available_methods[user_choice_index - 1] == 'suck dick':
                 self.suck_dick()
+            elif available_methods[user_choice_index - 1] == 'go to work':
+                self.go_to_work()
         
         
     
@@ -126,22 +132,22 @@ class Player:
     
     def sell_crack(self):
         prob = random.randrange(0, (self.alc + 1))
-        if prob < 3:
+        if prob < 1:
             self.wallet += 10
-            self.energy -= 5
+            self.energy -= 10
             print(f"\n{self.name} - You sold crack!\nYou now have ${self.wallet} in your wallet!\nDon't you just love crack, {self.name}?")
-        elif prob >=3:
-            print('''You drunk idiot! You went to the bathroom and DID crack. *__*''')
+        else:
+            print('''\nYou drunk idiot! You went to the bathroom and DID crack. *__*''')
             self.energy *=2
         self.time += 3
         print ('\n')
     
     def suck_dick(self):
         prob = random.randrange(0, (self.alc + 1))
-        if prob < 5:
+        if prob < 2:
             self.wallet += 50//(self.alc/2 + 1)
             print(f"\nCongratulations! You sucked dick in the bathroom, {self.name}. You're doing great for yourself!\nYour Wallet: ${self.wallet}")
-            if random.choice([1,2,3]) == 1:
+            if random.choice([1,2]) == 1:
                 self.aids += 1
                 print(f"Oh no! You got an AIDS.\nYou have a total of {self.aids} AIDS.")
         else:
@@ -149,6 +155,10 @@ class Player:
         self.time += 3
         self.energy -= 20
         print ('\n')
+
+    def go_to_work(self):
+        self.wallet += 20
+        self.time += 6
 
 
     
@@ -189,7 +199,7 @@ for player in player_dict.items():
     if player[1].alc == max_alc:
         winners.append(player[1].name)
 for winner in winners:
-    print(f"{winner} won! They drank {max_alc} total alcohol!\nWe should all try to be more like {winner} and drink more!")
+    print(f"\n{winner} won! They drank {max_alc} total alcohols!\nWe should all try to be more like {winner} and drink more!")
 print("\nGame Over")
 
 
