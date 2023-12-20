@@ -1,6 +1,7 @@
 import math
 import random
 
+print('\nWELCOME TO THE KRAKEN, the greatest bar ever!\n\nWe play a little game here at the Kraken called "Getting really drunk!"\nThe object of the game is to get as drunk as possible!\nBut be careful, or you might find yourself in trouble!\n\n* Note: If anything strange happens in the terminal or you want to quit, type "control^ + c" to EXIT, then "clear" to CLEAR the terminal. \n\n')
 total_time_elapsed = 1
 
 class Beverage:
@@ -200,7 +201,7 @@ for player in player_dict.items():
         winners.append(player[1].name)
 for winner in winners:
     print(f"\n{winner} won! They drank {max_alc} total alcohols!\nWe should all try to be more like {winner} and drink more!")
-print("\nGame Over")
+print("/n\nGAME OVER\n\nThanks for playing!")
 
 
 ### Test Methods ###
