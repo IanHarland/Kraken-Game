@@ -25,7 +25,35 @@ class Player:
         self.energy = 10
     
     def choose_action(self):
-        pass
+            available_methods = []
+            if self.alc * 2 <= self.time:
+                available_methods.append('drink')
+            if self.wallet > 0:
+                available_methods.append('play pool')
+            if self.energy >= 5:
+                available_methods.append('dance')
+            available_methods.append('sell crack')
+            available_methods.append('suck dick')
+            user_choice_string = ""
+            count = 1
+            for item in available_methods:
+                user_choice_string += f'\n{count} - ' + item
+                count += 1
+            user_choice_index = int(input(f"{self.name} - choose one of the following actions:{user_choice_string}\n: "))
+            while user_choice_index not in range(1, len(available_methods) + 1):
+                user_choice_index = int(input(f"{self.name} - choose one of the following actions:{user_choice_string}\nEnter a digit in 1-{count}: "))
+            if available_methods[user_choice_index - 1] == 'drink':
+                self.drink()
+            elif available_methods[user_choice_index - 1] == 'play pool':
+                self.play_pool()
+            elif available_methods[user_choice_index - 1] == 'dance':
+                self.dance()
+            elif available_methods[user_choice_index - 1] == 'sell crack':
+                self.sell_crack()
+            elif available_methods[user_choice_index - 1] == 'suck dick':
+                self.suck_dick()
+        
+        
     
     def drink(self):
         bev_string = ""
@@ -120,8 +148,6 @@ class Player:
                 
             
 
-
-
 num_of_players = int(input("How many players will be playing?\nEnter a number 1-5: "))
 while num_of_players < 1 or num_of_players > 5:
     num_of_players = int(input("Enter a number 1-5: "))
@@ -131,8 +157,9 @@ for player in range(1, num_of_players + 1):
     player_dict[player] = Player(input(f'Enter player {player} name: '))
 
 ### Test Methods ###
-player_dict[1].drink()
-player_dict[2].play_pool()
-player_dict[3].dance()
-player_dict[4].sell_crack()
-player_dict[5].suck_dick()
+# player_dict[1].drink()
+# player_dict[2].play_pool()
+# player_dict[3].dance()
+# player_dict[4].sell_crack()
+# player_dict[5].suck_dick()
+player_dict[1].choose_action()
