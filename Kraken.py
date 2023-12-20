@@ -1,7 +1,7 @@
 import math
 import random
 
-total_time_elapsed = 0
+total_time_elapsed = 1
 
 class Beverage:
     def __init__(self, name, alc, price, energy):
@@ -37,8 +37,9 @@ class Player:
                 available_methods.append('play pool')
             if self.energy >= 5:
                 available_methods.append('dance')
-            available_methods.append('sell crack')
-            if self.time > 3:
+            if self.energy >= 5 and total_time_elapsed >= 1:
+                available_methods.append('sell crack')
+            if self.time > 3 and self.energy >= 20:
                 available_methods.append('suck dick')
             user_choice_string = ""
             count = 1
@@ -79,7 +80,6 @@ class Player:
             self.alc += beverage.alc
             self.energy += beverage.energy
         print(f"Your total alcohol consumed is {self.alc} and you have ${self.wallet} in your wallet. You have {self.energy} energy.")
-        self.time += 1
         print ('\n')
 
     def play_pool(self):
@@ -128,11 +128,12 @@ class Player:
         prob = random.randrange(0, (self.alc + 1))
         if prob < 3:
             self.wallet += 10
+            self.energy -= 5
             print(f"\n{self.name} - You sold crack!\nYou now have ${self.wallet} in your wallet!\nDon't you just love crack, {self.name}?")
         elif prob >=3:
             print('''You drunk idiot! You went to the bathroom and DID crack. *__*''')
             self.energy *=2
-        self.time += 2
+        self.time += 3
         print ('\n')
     
     def suck_dick(self):
@@ -146,7 +147,7 @@ class Player:
         else:
             print("\nYou poor lonely soul. You went to the bathroom and tried (unsuccessfully) to suck your own dick.")
         self.time += 3
-        self.energy -= 10
+        self.energy -= 20
         print ('\n')
 
 
@@ -174,7 +175,7 @@ while total_time_elapsed <= int(player_choice_length_of_game):
     min_time = min(players_list_times)
     min_time_index = players_list_times.index(min_time)
     current = player_dict[min_time_index + 1]
-    print(f"\n{current.name} Stats:\nTime Spent: {current.time} hours\nAlcohol Intake:{current.alc}\nWallet: ${current.wallet}\nEnergy: {current.energy} Energies\nAids: {current.aids}\n")
+    print(f"\n{current.name} Stats:\nTime Spent: {current.time} hours\nAlcohol Intake: {current.alc}\nWallet: ${current.wallet}\nEnergy: {current.energy} Energies\nAids: {current.aids}\n")
     current.choose_action()
     total_time_elapsed += 1
 
