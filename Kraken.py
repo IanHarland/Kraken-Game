@@ -1,6 +1,18 @@
 import math
 import random
 
+print("\n\n",
+'''888    d8P                   888                        
+ 888   d8P                    888                        
+ 888  d8P                     888                        
+ 888d88K     888d888  8888b.  888  888  .d88b.  88888b.  
+ 8888888b    888P"       "88b 888 .88P d8P  Y8b 888 "88b 
+ 888  Y88b   888     .d888888 888888K  88888888 888  888 
+ 888   Y88b  888     888  888 888 "88b Y8b.     888  888 
+ 888    Y88b 888     "Y888888 888  888  "Y8888  888  888 
+                                                        
+                                                        
+                                                        ''')
 print('\nWELCOME TO THE KRAKEN, the greatest bar ever!\n\nWe play a little game here at the Kraken called "Getting really drunk!"\nThe object of the game is to get as drunk as possible!\nBut be careful, or you might find yourself in trouble!\n\n* Note: If anything strange happens in the terminal or you want to quit, type "control^ + c" to EXIT, then "clear" to CLEAR the terminal. \n\n')
 total_time_elapsed = 1
 
@@ -114,19 +126,19 @@ class Player:
         
 
     def dance(self):
-        choice = input(f'{self.name} - Do you want to dance\n(a) fast\n..or..\n(b) slow\n?: ')
+        choice = input(f'\nDo you want to dance\n(a) fast\n..or..\n(b) slow\n?: ')
         while choice != 'a' and choice != 'b':
-            choice = input('Choose\n(a) fast\n..or..\n(b) slow\n: ')
+            choice = input('\nChoose\n(a) fast\n..or..\n(b) slow\n: ')
         if choice == 'a':
             if self.energy >= 10:
                 print(f"\n{self.name}: 'Woooooweeeeee yeahhhhhhh!!'")
                 self.energy -= 10
                 self.time += 1
             else:
-                print(f"You don't have enough (10) energy to dance fast.\nYou have {self.energy} energy.")
+                print(f"\nYou don't have enough (10) energy to dance fast.\nYou have {self.energy} energy.")
                 self.dance()
         else:
-                print("Ooo yeah baby, come in a little closer.")
+                print(f"\n{self.name}: Ooo yeah baby, come in a little closer.")
                 self.energy -= 5
                 self.time += 1
         print ('\n')
@@ -173,9 +185,9 @@ while num_of_players < 1 or num_of_players > 5:
 
 player_dict = {}
 for player in range(1, num_of_players + 1):
-    player_dict[player] = Player(input(f'Enter player {player} name: '))
+    player_dict[player] = Player(input(f'\nEnter player {player} name: '))
 
-player_choice_length_of_game = input('How long would you like the game to be?\nEnter a numer less than 100: ')
+player_choice_length_of_game = input('\nHow long would you like the game to be?\nEnter a number less than 100: ')
 while (player_choice_length_of_game.isdigit() == False) or (int(player_choice_length_of_game) < 1):
     player_choice_length_of_game = input('How long would you like the game to be?\nEnter a number less than 100: ')
 
@@ -201,7 +213,7 @@ for player in player_dict.items():
         winners.append(player[1].name)
 for winner in winners:
     print(f"\n{winner} won! They drank {max_alc} total alcohols!\nWe should all try to be more like {winner} and drink more!")
-print("/n\nGAME OVER\n\nThanks for playing!")
+print("\n\nGAME OVER\n\nThanks for playing!")
 
 
 ### Test Methods ###
