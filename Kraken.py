@@ -33,7 +33,7 @@ class Player:
         for item in beverage_list:
             bev_string += f"\n{count} - {item.name} .. ${item.price}"
             count += 1
-        bev = int(input('Do you want:' + bev_string + '\n?: '))
+        bev = int(input(f'{self.name} - Do you want:' + bev_string + '\n?: '))
         while bev not in range(1, 1 + len(beverage_list)):
             bev = int(input(f"Oops, choose a number from 1 to {len(beverage_list)}: "))
         beverage = beverage_list[bev - 1]
@@ -46,9 +46,10 @@ class Player:
             self.energy += beverage.energy
         print(f"Your total alcohol consumed is {self.alc} and you have ${self.wallet} in your wallet. You have {self.energy} energy.")
         self.time += 1
+        print ('\n')
 
     def play_pool(self):
-        wager = int(input("How much would you like to wager?: $"))
+        wager = int(input(f"How much would you like to wager, {self.name}?: $"))
         while wager > self.wallet or type(wager) !=int:
             wager = int(input(f"Oops, please enter a valid amount. You have ${self.wallet} in your wallet: $"))
         fifty_per = random.choice([True, False])
@@ -67,14 +68,15 @@ class Player:
             self.wallet -= wager
             print(f"You lost! Pay up sucka'\nYou have ${self.wallet} left in your wallet.")
         self.time += 2
+        print ('\n')
 
     def dance(self):
-        choice = input('Do you want to dance\n(a) fast\n..or..\n(b) slow\n?: ')
+        choice = input(f'{self.name} - Do you want to dance\n(a) fast\n..or..\n(b) slow\n?: ')
         while choice != 'a' and choice != 'b':
             choice = input('Choose\n(a) fast\n..or..\n(b) slow')
         if choice == 'a':
             if self.energy >= 10:
-                print("Woooooweeeeee yeahhhhhhh!!")
+                print(f"{self.name}: 'Woooooweeeeee yeahhhhhhh!!'")
                 self.energy -= 10
                 self.time += 3
             else:
@@ -84,15 +86,17 @@ class Player:
                 print("Ooo yeah baby, come in a little closer.")
                 self.energy -= 5
                 self.time += 2
+        print ('\n')
     
     def sell_crack(self):
         prob = random.randrange(0, (self.alc + 1))
         if prob < 3:
             self.wallet += 10
-            print(f"You sold crack!\nYou now have ${self.wallet} in your wallet!\nDon't you just love crack?")
+            print(f"{self.name} - You sold crack!\nYou now have ${self.wallet} in your wallet!\nDon't you just love crack, {self.name}?")
         elif prob >=3:
             print('''You drunk idiot! You went to the bathroom and DID crack. *__*''')
             self.energy *=2
+        print ('\n')
     
 
                 
