@@ -177,7 +177,19 @@ while total_time_elapsed <= int(player_choice_length_of_game):
     print(f"\n{current.name} Stats:\nTime Spent: {current.time} hours\nAlcohol Intake:{current.alc}\nWallet: ${current.wallet}\nEnergy: {current.energy} Energies\nAids: {current.aids}\n")
     current.choose_action()
     total_time_elapsed += 1
-    
+
+
+players_alc_list = []
+for player in range(1, num_of_players + 1):
+        players_alc_list.append(player_dict[player].alc)
+max_alc = max(players_alc_list)
+winners = []
+for player in player_dict.items():
+    if player[1].alc == max_alc:
+        winners.append(player[1].name)
+for winner in winners:
+    print(f"{winner} won! They drank {max_alc} total alcohol!\nWe should all try to be more like {winner} and drink more!")
+print("\nGame Over")
 
 
 ### Test Methods ###
