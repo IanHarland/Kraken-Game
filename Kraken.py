@@ -60,20 +60,22 @@ class Player:
             while response != 'y' and response !='n':
                 response = input("Please choose 'y' or 'n' and press enter: ")
             if response == 'y':
-                self.time += 2
+                print ('\n')
                 self.play_pool()
             elif response == 'n':
                 print(f'Oh well, see ya around pal.\nYou have ${self.wallet} in your wallet.')
+                print ('\n')
         else:
             self.wallet -= wager
             print(f"You lost! Pay up sucka'\nYou have ${self.wallet} left in your wallet.")
+            print ('\n')
         self.time += 2
-        print ('\n')
+        
 
     def dance(self):
         choice = input(f'{self.name} - Do you want to dance\n(a) fast\n..or..\n(b) slow\n?: ')
         while choice != 'a' and choice != 'b':
-            choice = input('Choose\n(a) fast\n..or..\n(b) slow')
+            choice = input('Choose\n(a) fast\n..or..\n(b) slow\n: ')
         if choice == 'a':
             if self.energy >= 10:
                 print(f"{self.name}: 'Woooooweeeeee yeahhhhhhh!!'")
@@ -96,7 +98,23 @@ class Player:
         elif prob >=3:
             print('''You drunk idiot! You went to the bathroom and DID crack. *__*''')
             self.energy *=2
+        self.time += 3
         print ('\n')
+    
+    def suck_dick(self):
+        prob = random.randrange(0, (self.alc + 1))
+        if prob < 5:
+            self.wallet += 50//(self.alc + 1)
+            print(f"Congratulations! You sucked dick in the bathroom, {self.name}. You're doing great for yourself!\nYour Wallet: ${self.wallet}")
+            if random.choice([1,2,3]) == 1:
+                self.aids += 1
+                print(f"Oh no! You got an AIDS.\nYou have a total of {self.aids} AIDS.")
+        else:
+            print("You poor lonely soul. You went to the bathroom and tried (unsuccessfully) to suck your own dick.")
+        self.time += 5
+        self.energy -= 10
+
+
     
 
                 
@@ -104,9 +122,9 @@ class Player:
 
 
 
-num_of_players = int(input("How many players will be playing?\nEnter a number 1-4: "))
-while num_of_players < 1 or num_of_players > 4:
-    num_of_players = int(input("Enter a number 1-4: "))
+num_of_players = int(input("How many players will be playing?\nEnter a number 1-5: "))
+while num_of_players < 1 or num_of_players > 5:
+    num_of_players = int(input("Enter a number 1-5: "))
 
 player_dict = {}
 for player in range(1, num_of_players + 1):
@@ -117,3 +135,4 @@ player_dict[1].drink()
 player_dict[2].play_pool()
 player_dict[3].dance()
 player_dict[4].sell_crack()
+player_dict[5].suck_dick()
