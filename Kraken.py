@@ -68,6 +68,28 @@ class Player:
             print(f"You lost! Pay up sucka'\nYou have ${self.wallet} left in your wallet.")
         self.time += 2
 
+    def dance(self):
+        choice = input('Do you want to dance\n(a) fast\n..or..\n(b) slow\n?: ')
+        while choice != 'a' and choice != 'b':
+            choice = input('Choose\n(a) fast\n..or..\n(b) slow')
+        if choice == 'a':
+            if self.energy >= 10:
+                print("Woooooweeeeee yeahhhhhhh!!")
+                self.energy -= 10
+                self.time += 3
+            else:
+                print(f"You don't have enough (10) energy to dance fast.\nYou have {self.energy} energy.")
+                self.dance()
+        else:
+                print("Ooo yeah baby, come in a little closer.")
+                self.energy -= 5
+                self.time += 2
+
+                
+            
+
+
+
 num_of_players = int(input("How many players will be playing?\nEnter a number 1-4: "))
 while num_of_players < 1 or num_of_players > 4:
     num_of_players = int(input("Enter a number 1-4: "))
@@ -79,4 +101,4 @@ for player in range(1, num_of_players + 1):
 ### Test Methods ###
 player_dict[1].drink()
 player_dict[2].play_pool()
-
+player_dict[3].dance()
