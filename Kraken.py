@@ -29,8 +29,8 @@ class Player:
     
     def drink(self):
         bev_string = ""
+        count = 1
         for item in beverage_list:
-            count = 1
             bev_string += f"\n{count} - {item.name} .. ${item.price}"
             count += 1
         bev = int(input('Do you want:' + bev_string + '\n?: '))
@@ -47,28 +47,36 @@ class Player:
         print(f"Your total alcohol consumed is {self.alc} and you have ${self.wallet} in your wallet. You have {self.energy} energy.")
         self.time += 1
 
-    def play_pool(self, wager):
+    def play_pool(self):
+        wager = int(input("How much would you like to wager?: $"))
+        while wager > self.wallet or type(wager) !=int:
+            wager = int(input(f"Oops, please enter a valid amount. You have ${self.wallet} in your wallet: $"))
         fifty_per = random.choice([True, False])
         if fifty_per is True:
             print("You won!")
             self.wallet += wager
             response = input("Would you like to play again? y or n: ")
-            while response != 'y' or response !='n':
+            while response != 'y' and response !='n':
                 response = input("Please choose 'y' or 'n' and press enter: ")
             if response == 'y':
                 self.time += 2
-                new_wager = input(f'How much do you want to wager?You have ${self.wallet} in your wallet.')
-                while type(new_wager) != int or new_wager > self.wallet:
-                    new_wager = input('Oops, please enter a number of dollars to wager.') 
-                self.play_pool(new_wager)
+                self.play_pool()
             elif response == 'n':
-                print('Oh well, see ya around pal.')
+                print(f'Oh well, see ya around pal.\nYou have ${self.wallet} in your wallet.')
         else:
-            print("You lost! Pay up sucka'")
             self.wallet -= wager
+            print(f"You lost! Pay up sucka'\nYou have ${self.wallet} left in your wallet.")
         self.time += 2
 
-player1 = Player(input("Player 1: "))
-player2 = Player(input("Player 2: "))
+num_of_players = int(input("How many players will be playing?\nEnter a number 1-4: "))
+while num_of_players < 1 or num_of_players > 4:
+    num_of_players = int(input("Enter a number 1-4: "))
 
-player1.drink()
+player_dict = {}
+for player in range(1, num_of_players + 1):
+    player_dict[player] = Player(input(f'Enter player {player} name: '))
+
+### Test Methods ###
+player_dict[1].drink()
+player_dict[2].play_pool()
+
