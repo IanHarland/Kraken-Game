@@ -187,16 +187,16 @@ class Player:
             
 
 num_of_players = input("How many players will be playing?\nEnter a number 1-5: ")
-if num_of_players.isdigit() == True:
+if num_of_players.isdigit() == True and int(num_of_players) >=1 and int(num_of_players) <= 5:
     num_of_players = int(num_of_players)
 else:
-    while num_of_players.isdigit() == False:
+    while num_of_players.isdigit() == False or int(num_of_players) <1 or int(num_of_players) > 5:
         num_of_players = input("\nEnter a number 1-5: ")
     num_of_players = int(num_of_players)
-if num_of_players < 1:
-    num_of_players = 1
-if num_of_players > 5:
-    num_of_players = 5
+# if num_of_players < 1:
+#     num_of_players = 1
+# if num_of_players > 5:
+#     num_of_players = 5
 
 player_dict = {}
 for player in range(1, num_of_players + 1):
