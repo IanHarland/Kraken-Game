@@ -50,9 +50,9 @@ class Player:
                 available_methods.append('play pool')
             if self.energy >= 10:
                 available_methods.append('dance')
-            if self.energy >= 5 and total_time_elapsed >= 1:
+            if self.energy >= 5 and self.time > 1:
                 available_methods.append('sell crack')
-            if self.time > 3 and self.energy >= 20:
+            if self.time > 1 and self.energy >= 10:
                 available_methods.append('suck dick')
             available_methods.append('go to work')
             user_choice_string = ""
@@ -133,7 +133,7 @@ class Player:
             if self.energy >= 10:
                 print(f"\n{self.name}: 'Woooooweeeeee yeahhhhhhh!!'")
                 self.energy -= 10
-                self.time += 1
+                self.time += 2
             else:
                 print(f"\nYou don't have enough (10) energy to dance fast.\nYou have {self.energy} energy.")
                 self.dance()
@@ -158,20 +158,27 @@ class Player:
     def suck_dick(self):
         prob = random.randrange(0, (self.alc + 1))
         if prob < 2:
-            self.wallet += 50//(self.alc/2 + 1)
+            self.wallet += 50//(self.alc/3 + 1)
             print(f"\nCongratulations! You sucked dick in the bathroom, {self.name}. You're doing great for yourself!\nYour Wallet: ${self.wallet}")
             if random.choice([1,2]) == 1:
                 self.aids += 1
                 print(f"Oh no! You got an AIDS.\nYou have a total of {self.aids} AIDS.")
+                if self.aids == 3:
+                    print("You died of AIDS! You lose.")
+                    self.alc = 0
+                    self.time = 1000
         else:
             print("\nYou poor lonely soul. You went to the bathroom and tried (unsuccessfully) to suck your own dick.")
         self.time += 3
-        self.energy -= 20
+        self.energy -= 10
         print ('\n')
 
     def go_to_work(self):
-        self.wallet += 20
-        self.time += 6
+        self.wallet = 20
+        self.energy = 20
+        self.time += 3
+        self.alc = 0
+        print("You went to work, it was dreadfully boring.\n Your stats are reset except for 'time' and 'aids'")
 
 
     
